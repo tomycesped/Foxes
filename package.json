@@ -2,9 +2,12 @@
   "name": "react-con-ts",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://tomycesped.github.io/Foxes/",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist",
     "start": "next start",
     "lint": "next lint"
   },
@@ -24,6 +27,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "15.1.7",
+    "gh-pages": "^6.3.0",
     "typescript": "^5"
   }
 }
