@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Lazy Foxes!",
-  description: "A next app made by Thomas Cespedes",
+  description: "A Next.js app made by Thomas Cespedes",
 };
 
 export default function RootLayout({
