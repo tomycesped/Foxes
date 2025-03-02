@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import type { MouseEventHandler } from "react";
 import type { NextPage } from "next";
 import Head from "next/head";
@@ -20,18 +20,34 @@ const myRandom = () => random(1, 123);
 
 const Home: NextPage = () => {
   const [images, setImages] = useState<Array<IFoxImageItem>>([]);
+  const mainRef = useRef<HTMLDivElement>(null);
+  const isInitialMount = useRef(true);
 
   const addNewFox: MouseEventHandler<HTMLButtonElement> = () => {
     const id = generateId();
     const url = `https://randomfox.ca/images/${myRandom()}.jpg`;
-    setImages([...images, { id, url }]);
+    setImages(prev => [...prev, { id, url }]);
   };
 
+  // Scroll al agregar la primera imagen
+  useEffect(() => {
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+    } else {
+      if (images.length === 1) {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      }
+    }
+  }, [images.length]);
+
   return (
-    <div className="overflow-x-hidden bg-amber-500">
+    <div className="overflow-x-hidden bg-amber-500 min-h-screen flex flex-col">
       <Head>
         <title>Lazy Foxes!</title>
-        <meta name="description" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -43,33 +59,36 @@ const Home: NextPage = () => {
         </div>
         <div className="flex flex-col items-center">
           <div className="flex items-center gap-3">
-          <motion.button
-           onClick={addNewFox}
-          className="relative bg-amber-500 hover:bg-amber-600 text-white font-bold py-2 px-4 rounded-full mb-2 overflow-hidden"
-          whileTap={{ scale: 0.9 }}
-          >
-           Add new fox
-           <motion.span
-             className="absolute inset-0 rounded-full bg-white opacity-20"
-              initial={{ scale: 0 }}
-              animate={{ scale: [0, 1.5], opacity: [0.5, 0] }}
-             transition={{ duration: 0.5 }}
-            />
+            <motion.button
+              onClick={addNewFox}
+              className="relative bg-amber-500 hover:bg-amber-600 text-white font-bold py-2 px-4 rounded-full mb-2 overflow-hidden"
+              whileTap={{ scale: 0.9 }}
+            >
+              Add new fox
+              <motion.span
+                className="absolute inset-0 rounded-full bg-white opacity-20"
+                initial={{ scale: 0 }}
+                animate={{ scale: [0, 1.5], opacity: [0.5, 0] }}
+                transition={{ duration: 0.5 }}
+              />
             </motion.button>
             <motion.span
-             key={images.length}
-            className="text-white text-lg font-bold flex items-center gap-1"
-            initial={{ opacity: 0, y: -5 }}
-             animate={{ opacity: 1, y: 0 }}
-             transition={{ duration: 0.3 }}
+              key={images.length}
+              className="text-white text-lg font-bold flex items-center gap-1"
+              initial={{ opacity: 0, y: -5 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3 }}
             >
-             {images.length} 🦊
+              {images.length} 🦊
             </motion.span>
           </div>
         </div>
       </header>
 
-      <main className="pt-[115px] pb-[60px] min-h-screen">
+      <main 
+        ref={mainRef}
+        className="flex-1 pt-[115px] pb-[70px] md:pt-[170px] md:pb-[80px]"
+      >
         <div className="flex flex-col items-center">
           {images.map(({ id, url }, index) => (
             <div className="p-4 w-full max-w-md" key={id}>
@@ -86,6 +105,7 @@ const Home: NextPage = () => {
           ))}
         </div>
       </main>
+
       <footer className="fixed bottom-0 left-0 right-0 bg-amber-800 text-white text-center p-2 pb-3">
         <p>Hecho con amor por @tomcesped</p>
         <p>API administrada por randomfox.ca</p>

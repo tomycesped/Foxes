@@ -3,4 +3,11 @@
 html, body {
    background-color: orange;
     overflow-x: hidden;
+    height: 100%;
+}
+
+@supports (height: 100dvh) {
+    body {
+        height: 100dvh;
+    }
 }
