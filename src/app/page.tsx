@@ -47,7 +47,7 @@ const Home: NextPage = () => {
     <div className="overflow-x-hidden bg-amber-500 min-h-screen flex flex-col">
       <Head>
         <title>Lazy Foxes!</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -106,7 +106,7 @@ const Home: NextPage = () => {
         </div>
       </main>
 
-      <footer className="fixed bottom-0 left-0 right-0 bg-amber-800 text-white text-center p-2 pb-[calc(0.75rem+env(safe-area-inset-bottom))] border-t-2 border-amber-800 shadow-[0_-5px_10px_0_rgba(146,64,14,0.3)]">
+      <footer className="fixed bottom-0 left-0 right-0 bg-amber-800 text-white text-center p-2 pb-safe shadow-[0_-5px_10px_0_rgba(146,64,14,0.3)]">
         <p>Hecho con amor por @tomcesped</p>
         <p>API administrada por randomfox.ca</p>
       </footer>

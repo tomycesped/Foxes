@@ -4,6 +4,13 @@ html, body {
    background-color: orange;
     overflow-x: hidden;
     height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
 }
 
 @supports (height: 100dvh) {
@@ -11,3 +18,7 @@ html, body {
         height: 100dvh;
     }
 }
+
+.pb-safe {
+    padding-bottom: calc(0.5rem + env(safe-area-inset-bottom, 0px));
+  }
