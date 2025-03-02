@@ -23,28 +23,6 @@ const Home: NextPage = () => {
   const mainRef = useRef<HTMLDivElement>(null);
   const isInitialMount = useRef(true);
 
-  // Inicializar la altura de la ventana al cargar la página
-  useEffect(() => {
-    const setDocHeight = () => {
-      document.documentElement.style.setProperty(
-        '--app-height', 
-        `${window.innerHeight}px`
-      );
-    };
-    
-    // Ejecutar inmediatamente
-    setDocHeight();
-    
-    // Configurar para ejecutar en cambios de tamaño
-    window.addEventListener('resize', setDocHeight);
-    window.addEventListener('orientationchange', setDocHeight);
-    
-    return () => {
-      window.removeEventListener('resize', setDocHeight);
-      window.removeEventListener('orientationchange', setDocHeight);
-    };
-  }, []);
-
   const addNewFox: MouseEventHandler<HTMLButtonElement> = () => {
     const id = generateId();
     const url = `https://randomfox.ca/images/${myRandom()}.jpg`;
@@ -66,16 +44,20 @@ const Home: NextPage = () => {
   }, [images.length]);
 
   return (
-    <div className="app-container bg-amber-500 flex flex-col">
+    <div className="overflow-x-hidden bg-amber-500 min-h-screen flex flex-col">
       <Head>
-        <title>Lazy Foxes!</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
-        <meta name="theme-color" content="#92400E" />
-        <meta name="mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+     <title>Lazy Foxes!</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+      <meta name="theme-color" content="#92400E" />
+      <meta name="msapplication-navbutton-color" content="#92400E" />
+      <meta name="mobile-web-app-capable" content="yes" />
+      <meta name="apple-mobile-web-app-capable" content="yes" />
+      <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+      <meta name="apple-mobile-web-app-title" content="Foxes" />
+      <meta name="msapplication-TileColor" content="#92400E" />
+      <link rel="icon" href="/favicon.ico" />
+      <meta name="format-detection" content="telephone=no" />
+    </Head>
 
       <header className="fixed top-0 left-0 right-0 bg-amber-800 shadow-2xl z-10">
         <div className="p-1 px-4 flex items-center justify-between">
@@ -113,7 +95,7 @@ const Home: NextPage = () => {
 
       <main 
         ref={mainRef}
-        className="flex-1 pt-[115px] pb-24 md:pt-[170px]"
+        className="flex-1 pt-[115px] pb-[calc(70px+env(safe-area-inset-bottom))] md:pt-[170px]"
       >
         <div className="flex flex-col items-center">
           {images.map(({ id, url }, index) => (
@@ -132,7 +114,7 @@ const Home: NextPage = () => {
         </div>
       </main>
 
-      <footer className="fixed-footer bg-amber-800 text-white text-center p-2 shadow-[0_-5px_10px_0_rgba(146,64,14,0.3)]">
+      <footer className="fixed bottom-0 left-0 right-0 bg-amber-800 text-white text-center p-2 pb-safe shadow-[0_-5px_10px_0_rgba(146,64,14,0.3)]">
         <p>Hecho con amor por @tomcesped</p>
         <p>API administrada por randomfox.ca</p>
       </footer>

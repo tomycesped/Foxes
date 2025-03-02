@@ -1,41 +1,24 @@
 @import "tailwindcss";
 
-:root {
-  --app-height: 100%;
-}
-
 html, body {
-  background-color: orange;
-  overflow-x: hidden;
-  height: 100%;
-  margin: 0;
-  padding: 0;
+   background-color: orange;
+    overflow-x: hidden;
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
-body, #__next {
-  display: flex;
-  flex-direction: column;
-  min-height: 100%;
+body {
+    display: flex;
+    flex-direction: column;
 }
 
-/* Contenedor principal que usa la variable CSS para la altura */
-.app-container {
-  height: var(--app-height);
-  overflow-x: hidden;
-  position: relative;
-}
-
-/* Estilo específico para el footer */
-.fixed-footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-}
-
-/* Para browsers modernos */
 @supports (height: 100dvh) {
-  .app-container {
-    height: 100dvh;
-  }
+    body {
+        height: 100dvh;
+    }
 }
+
+.pb-safe {
+    padding-bottom: calc(0.5rem + env(safe-area-inset-bottom, 0px));
+  }
