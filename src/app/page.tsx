@@ -115,8 +115,8 @@ const Home: NextPage = () => {
       </main>
 
       <footer className="fixed bottom-0 left-0 right-0 bg-amber-800 text-white text-center p-2 pb-safe shadow-[0_-5px_10px_0_rgba(146,64,14,0.3)]">
-        <p>Hecho con amor por @tomcesped</p>
-        <p>API administrada por randomfox.ca</p>
+        <p>Made with love by @tomcesped 🖤</p>
+        <p>API by randomfox.ca</p>
       </footer>
     </div>
   );
