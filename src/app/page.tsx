@@ -87,7 +87,7 @@ const Home: NextPage = () => {
 
       <main 
         ref={mainRef}
-        className="flex-1 pt-[115px] pb-[70px] md:pt-[170px] md:pb-[80px]"
+        className="flex-1 pt-[115px] pb-[calc(70px+env(safe-area-inset-bottom))] md:pt-[170px]"
       >
         <div className="flex flex-col items-center">
           {images.map(({ id, url }, index) => (
@@ -106,7 +106,7 @@ const Home: NextPage = () => {
         </div>
       </main>
 
-      <footer className="fixed bottom-0 left-0 right-0 bg-amber-800 text-white text-center p-2 pb-3">
+      <footer className="fixed bottom-0 left-0 right-0 bg-amber-800 text-white text-center p-2 pb-[calc(0.75rem+env(safe-area-inset-bottom))] border-t-2 border-amber-800 shadow-[0_-5px_10px_0_rgba(146,64,14,0.3)]">
         <p>Hecho con amor por @tomcesped</p>
         <p>API administrada por randomfox.ca</p>
       </footer>
