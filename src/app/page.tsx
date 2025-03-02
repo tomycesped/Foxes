@@ -59,11 +59,11 @@ const Home: NextPage = () => {
       <meta name="format-detection" content="telephone=no" />
     </Head>
 
-      <header className="fixed top-0 left-0 right-0 bg-amber-800 shadow-2xl z-10">
-        <div className="p-1 px-4 flex items-center justify-between">
-          <h1 className="text-5xl">🦊</h1>
-          <h1 className="font-serif underline text-white text-4xl py-2">Foxes</h1>
-          <h1 className="text-5xl">🦊</h1>
+      <header className="fixed top-0 left-0 right-0 bg-amber-800 shadow-2xl z-10 rounded-b-xl">
+        <div className="p-0 px-4 flex items-center justify-center">
+          <h1 className="text-5xl pt-12 absolute left-0 pl-3">🦊</h1>
+          <h1 className="font-serif underline text-white text-4xl pt-2 pb-2">Foxes</h1>
+          <h1 className="text-5xl pt-12 pr-3 absolute right-0">🦊</h1>
         </div>
         <div className="flex flex-col items-center">
           <div className="flex items-center gap-3">
