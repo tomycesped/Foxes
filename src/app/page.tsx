@@ -28,7 +28,7 @@ const Home: NextPage = () => {
   };
 
   return (
-    <div>
+    <div className="overflow-x-hidden bg-amber-500">
       <Head>
         <title>Lazy Foxes!</title>
         <meta name="description" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
@@ -69,10 +69,10 @@ const Home: NextPage = () => {
         </div>
       </header>
 
-      <main className="flex flex-col justify-between bg-amber-500 min-h-screen pt-[170px] pb-[60px] overflow-y-hidden">
-        <div className="mt-[-60px]">
+      <main className="pt-[170px] pb-[60px] min-h-screen">
+        <div className="flex flex-col items-center">
           {images.map(({ id, url }, index) => (
-            <div className="p-4" key={id}>
+            <div className="p-4 w-full max-w-md" key={id}>
               <LazyImage
                 src={url}
                 width="320"
