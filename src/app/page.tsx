@@ -57,13 +57,13 @@ const Home: NextPage = () => {
             />
             </motion.button>
             <motion.span
-              key={images.length}
-              className="text-white text-lg font-bold mb-1"
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              transition={{ type: "tween", stiffness: 100, damping: 15 }}
+             key={images.length}
+            className="text-white text-lg font-bold flex items-center gap-1"
+            initial={{ opacity: 0, y: -5 }}
+             animate={{ opacity: 1, y: 0 }}
+             transition={{ duration: 0.3 }}
             >
-              {images.length} {"🦊"}
+             {images.length} 🦊
             </motion.span>
           </div>
         </div>
@@ -86,7 +86,7 @@ const Home: NextPage = () => {
           ))}
         </div>
       </main>
-      <footer className="fixed bottom-0 left-0 right-0 bg-amber-800 text-white text-center p-2">
+      <footer className="fixed bottom-0 left-0 right-0 bg-amber-800 text-white text-center p-2 pb-3">
         <p>Hecho con amor por @tomcesped</p>
         <p>API administrada por randomfox.ca</p>
       </footer>
