@@ -20,8 +20,34 @@ const myRandom = () => random(1, 123);
 
 const Home: NextPage = () => {
   const [images, setImages] = useState<Array<IFoxImageItem>>([]);
+  const [windowHeight, setWindowHeight] = useState<number>(0);
   const mainRef = useRef<HTMLDivElement>(null);
   const isInitialMount = useRef(true);
+
+  // Detectar el tamaño real de la ventana
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowHeight(window.innerHeight);
+    };
+    
+    // Ejecutar inmediatamente para obtener la altura inicial
+    handleResize();
+    
+    // Agregar event listener para cambios de tamaño
+    window.addEventListener('resize', handleResize);
+    
+    // También se puede agregar un listener específico para el evento de orientación
+    window.addEventListener('orientationchange', handleResize);
+    
+    // Ejecutar después de un breve retraso para asegurarse de que la UI se ha estabilizado
+    const timeoutId = setTimeout(handleResize, 300);
+    
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('orientationchange', handleResize);
+      clearTimeout(timeoutId);
+    };
+  }, []);
 
   const addNewFox: MouseEventHandler<HTMLButtonElement> = () => {
     const id = generateId();
@@ -43,8 +69,11 @@ const Home: NextPage = () => {
     }
   }, [images.length]);
 
+  // Aplicar un estilo explícito al contenedor principal para forzar la altura
+  const containerStyle = windowHeight ? { minHeight: `${windowHeight}px` } : {};
+
   return (
-    <div className="overflow-x-hidden bg-amber-500 min-h-screen flex flex-col">
+    <div className="overflow-x-hidden bg-amber-500 flex flex-col" style={containerStyle}>
       <Head>
         <title>Lazy Foxes!</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
@@ -87,7 +116,7 @@ const Home: NextPage = () => {
 
       <main 
         ref={mainRef}
-        className="flex-1 pt-[115px] pb-[calc(70px+env(safe-area-inset-bottom))] md:pt-[170px]"
+        className="flex-1 pt-[115px] pb-[120px] md:pt-[170px]"
       >
         <div className="flex flex-col items-center">
           {images.map(({ id, url }, index) => (
@@ -106,7 +135,7 @@ const Home: NextPage = () => {
         </div>
       </main>
 
-      <footer className="fixed bottom-0 left-0 right-0 bg-amber-800 text-white text-center p-2 pb-safe shadow-[0_-5px_10px_0_rgba(146,64,14,0.3)]">
+      <footer className="fixed bottom-0 left-0 right-0 bg-amber-800 text-white text-center p-2 shadow-[0_-5px_10px_0_rgba(146,64,14,0.3)]">
         <p>Hecho con amor por @tomcesped</p>
         <p>API administrada por randomfox.ca</p>
       </footer>
