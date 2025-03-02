@@ -69,7 +69,7 @@ const Home: NextPage = () => {
         </div>
       </header>
 
-      <main className="bg-amber-500 min-h-screen pt-[170px] pb-[60px]">
+      <main className="flex flex-col justify-between bg-amber-500 min-h-screen pt-[170px] pb-[60px] overflow-y-hidden">
         <div className="mt-[-60px]">
           {images.map(({ id, url }, index) => (
             <div className="p-4" key={id}>
