@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import { useState, useEffect, useRef } from "react";
 import type { MouseEventHandler } from "react";
@@ -46,18 +46,18 @@ const Home: NextPage = () => {
   return (
     <div className="overflow-x-hidden bg-amber-500 min-h-screen flex flex-col">
       <Head>
-     <title>Lazy Foxes!</title>
-      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
-      <meta name="theme-color" content="#92400E" />
-      <meta name="msapplication-navbutton-color" content="#92400E" />
-      <meta name="mobile-web-app-capable" content="yes" />
-      <meta name="apple-mobile-web-app-capable" content="yes" />
-      <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-      <meta name="apple-mobile-web-app-title" content="Foxes" />
-      <meta name="msapplication-TileColor" content="#92400E" />
-      <link rel="icon" href="/favicon.ico" />
-      <meta name="format-detection" content="telephone=no" />
-    </Head>
+        <title>Lazy Foxes!</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+        <meta name="theme-color" content="#92400E" />
+        <meta name="msapplication-navbutton-color" content="#92400E" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="apple-mobile-web-app-title" content="Foxes" />
+        <meta name="msapplication-TileColor" content="#92400E" />
+        <link rel="icon" href="/favicon.ico" />
+        <meta name="format-detection" content="telephone=no" />
+      </Head>
 
       <header className="fixed top-0 left-0 right-0 bg-amber-800 shadow-2xl z-10 rounded-b-xl">
         <div className="p-0 px-4 flex items-center justify-center">
@@ -69,8 +69,13 @@ const Home: NextPage = () => {
           <div className="flex items-center gap-3">
             <motion.button
               onClick={addNewFox}
-              className="relative bg-amber-500 hover:bg-amber-600 text-white font-bold py-2 px-4 rounded-full mb-2 overflow-hidden"
+              className="relative bg-black hover:bg-gray-900 border-2 border-white text-white font-bold py-2 px-4 rounded-full mb-2 overflow-hidden"
               whileTap={{ scale: 0.9 }}
+              animate={{
+                scale: images.length === 0 ? [1, 1.08] : 1,
+                opacity: images.length === 0 ? [1, 0.9] : 1,
+              }}
+              transition={{ duration: 1, repeat: images.length === 0 ? Infinity : 0, repeatType: "reverse" }} 
             >
               Add new fox
               <motion.span
@@ -82,7 +87,7 @@ const Home: NextPage = () => {
             </motion.button>
             <motion.span
               key={images.length}
-              className="text-white text-lg font-bold flex items-center gap-1"
+              className="text-white text-lg font-bold flex items-center gap-1 mb-1.5"
               initial={{ opacity: 0, y: -5 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3 }}
